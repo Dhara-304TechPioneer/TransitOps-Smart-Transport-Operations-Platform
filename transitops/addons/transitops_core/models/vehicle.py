@@ -6,6 +6,7 @@ class TransitOpsVehicle(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Registration Number', required=True, copy=False, index=True)
+    image_1920 = fields.Image(string="Vehicle Image", max_width=1920, max_height=1920)
     model_name = fields.Char(string='Model Name', tracking=True)
     vehicle_type = fields.Selection([
         ('car', 'Car'),
@@ -24,6 +25,20 @@ class TransitOpsVehicle(models.Model):
         ('retired', 'Retired'),
     ], string='Status', default='available', tracking=True)
     active = fields.Boolean(default=True)
+
+    # Document Uploads
+    registration_document = fields.Binary(string='Registration Document', attachment=True)
+    registration_filename = fields.Char(string='Registration Filename')
+    insurance_document = fields.Binary(string='Insurance Document', attachment=True)
+    insurance_filename = fields.Char(string='Insurance Filename')
+
+    # Multi-Region Support
+    region = fields.Selection([
+        ('north', 'North Region'),
+        ('south', 'South Region'),
+        ('east', 'East Region'),
+        ('west', 'West Region')
+    ], string='Region', tracking=True)
 
     _sql_constraints = [
         ('name_unique', 'unique(name)', 'Vehicle registration number must be unique!')

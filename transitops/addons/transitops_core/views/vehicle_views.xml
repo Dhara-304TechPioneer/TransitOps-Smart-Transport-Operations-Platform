@@ -10,9 +10,12 @@
                     <field name="status" widget="statusbar" statusbar_visible="available,on_trip,in_shop,retired"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_1920'}"/>
                     <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Registration Number"/>
                         <h1>
-                            <field name="name" placeholder="Registration Number"/>
+                            <field name="name" placeholder="e.g. VAN-001"/>
                         </h1>
                     </div>
                     <group>
@@ -20,6 +23,7 @@
                             <field name="model_name"/>
                             <field name="vehicle_type"/>
                             <field name="max_load_kg"/>
+                            <field name="region"/>
                         </group>
                         <group>
                             <field name="odometer"/>
@@ -27,6 +31,14 @@
                             <field name="revenue"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Documents">
+                            <group>
+                                <field name="registration_document" filename="registration_filename"/>
+                                <field name="insurance_document" filename="insurance_filename"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -46,8 +58,30 @@
                 <field name="name"/>
                 <field name="model_name"/>
                 <field name="vehicle_type"/>
+                <field name="region"/>
                 <field name="status" decoration-success="status=='available'" decoration-warning="status=='in_shop'" decoration-danger="status=='retired'" decoration-info="status=='on_trip'" widget="badge"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- View: Search -->
+    <record id="view_transitops_vehicle_search" model="ir.ui.view">
+        <field name="name">transitops.vehicle.search</field>
+        <field name="model">transitops.vehicle</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="region"/>
+                <filter string="North Region" name="filter_region_north" domain="[('region', '=', 'north')]"/>
+                <filter string="South Region" name="filter_region_south" domain="[('region', '=', 'south')]"/>
+                <filter string="East Region" name="filter_region_east" domain="[('region', '=', 'east')]"/>
+                <filter string="West Region" name="filter_region_west" domain="[('region', '=', 'west')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_status" context="{'group_by':'status'}"/>
+                    <filter string="Region" name="group_by_region" context="{'group_by':'region'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

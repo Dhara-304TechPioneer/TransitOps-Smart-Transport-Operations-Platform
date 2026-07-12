@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Vehicle Form to add Ops Smart Buttons and Financial Fields -->
+    <record id="view_vehicle_form_inherit_ops" model="ir.ui.view">
+        <field name="name">transitops.vehicle.form.inherit.ops</field>
+        <field name="model">transitops.vehicle</field>
+        <field name="inherit_id" ref="transitops_core.view_transitops_vehicle_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Smart Buttons -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_transitops_maintenance)d" type="action" class="oe_stat_button" icon="fa-wrench" context="{'search_default_vehicle_id': id, 'default_vehicle_id': id}">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value">Logs</span>
+                        <span class="o_stat_text">Maintenance</span>
+                    </div>
+                </button>
+                <button name="%(action_transitops_fuel_log)d" type="action" class="oe_stat_button" icon="fa-tachometer" context="{'search_default_vehicle_id': id, 'default_vehicle_id': id}">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value">Logs</span>
+                        <span class="o_stat_text">Fuel</span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- Financial Fields -->
+            <xpath expr="//field[@name='revenue']" position="after">
+                <field name="total_maintenance_cost" widget="monetary"/>
+                <field name="total_fuel_cost" widget="monetary"/>
+                <field name="operational_cost" widget="monetary" decoration-danger="operational_cost &gt; revenue"/>
+                <field name="roi_percentage" widget="percentage" decoration-success="roi_percentage &gt; 0" decoration-danger="roi_percentage &lt; 0"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -3,4 +3,3 @@ access_transitops_vehicle_manager,transitops.vehicle.manager,model_transitops_ve
 access_transitops_vehicle_driver,transitops.vehicle.driver,model_transitops_vehicle,group_driver,1,0,0,0
 access_transitops_vehicle_safety,transitops.vehicle.safety,model_transitops_vehicle,group_safety_officer,1,0,0,0
 access_transitops_vehicle_financial,transitops.vehicle.financial,model_transitops_vehicle,group_financial_analyst,1,0,0,0
-access_transitops_vehicle_base,transitops.vehicle.base,model_transitops_vehicle,base.group_user,1,0,0,0

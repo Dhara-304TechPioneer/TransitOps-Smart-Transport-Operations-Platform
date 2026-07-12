@@ -10,6 +10,14 @@
                     <field name="status" widget="statusbar" statusbar_visible="available,on_trip,off_duty,suspended"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(transitops_fleet.action_transitops_trip)d" type="action" class="oe_stat_button" icon="fa-road" context="{'search_default_driver_id': id, 'default_driver_id': id}">
+                            <div class="o_stat_info">
+                                <field name="trip_count" class="o_stat_value"/>
+                                <span class="o_stat_text">Trips</span>
+                            </div>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Driver Name"/>
@@ -20,6 +28,7 @@
                             <field name="license_number"/>
                             <field name="license_category"/>
                             <field name="license_expiry"/>
+                            <field name="region"/>
                         </group>
                         <group>
                             <field name="contact_number"/>
@@ -45,9 +54,30 @@
                 <field name="name"/>
                 <field name="license_number"/>
                 <field name="license_expiry"/>
-                <field name="safety_score"/>
-                <field name="status" decoration-success="status=='available'" decoration-danger="status=='suspended'" decoration-info="status=='on_trip'" decoration-muted="status=='off_duty'" widget="badge"/>
+                <field name="region"/>
+                <field name="status" decoration-success="status=='available'" decoration-info="status=='on_trip'" decoration-warning="status=='off_duty'" decoration-danger="status=='suspended'" widget="badge"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- View: Search -->
+    <record id="view_transitops_driver_search" model="ir.ui.view">
+        <field name="name">transitops.driver.search</field>
+        <field name="model">transitops.driver</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="license_number"/>
+                <field name="region"/>
+                <filter string="North Region" name="filter_region_north" domain="[('region', '=', 'north')]"/>
+                <filter string="South Region" name="filter_region_south" domain="[('region', '=', 'south')]"/>
+                <filter string="East Region" name="filter_region_east" domain="[('region', '=', 'east')]"/>
+                <filter string="West Region" name="filter_region_west" domain="[('region', '=', 'west')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_status" context="{'group_by':'status'}"/>
+                    <filter string="Region" name="group_by_region" context="{'group_by':'region'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

@@ -16,8 +16,16 @@ This module provides the core functionality and base models for the Smart Transp
         'security/ir.model.access.csv',
         'views/vehicle_views.xml',
         'views/dashboard_views.xml',
+        'views/login_templates.xml',
         'data/vehicle_status_data.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'transitops_core/static/src/js/dashboard.js',
+            'transitops_core/static/src/xml/dashboard.xml',
+            'transitops_core/static/src/css/theme.css',
+        ],
+    },
     'demo': [],
     'installable': True,
     'application': True,

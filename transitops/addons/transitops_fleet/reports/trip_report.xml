@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_trip_dispatch" model="ir.actions.report">
+        <field name="name">Dispatch Sheet</field>
+        <field name="model">transitops.trip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">transitops_fleet.report_trip_dispatch_sheet</field>
+        <field name="report_file">transitops_fleet.report_trip_dispatch_sheet</field>
+        <field name="print_report_name">'Dispatch_Sheet_%s' % (object.id)</field>
+        <field name="binding_model_id" ref="model_transitops_trip"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_trip_dispatch_sheet">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Dispatch Sheet</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Vehicle:</strong>
+                                <p t-field="doc.vehicle_id.name"/>
+                                <strong>Driver:</strong>
+                                <p t-field="doc.driver_id.name"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Source:</strong>
+                                <p t-field="doc.source"/>
+                                <strong>Destination:</strong>
+                                <p t-field="doc.destination"/>
+                                <strong>Cargo Weight (kg):</strong>
+                                <p t-field="doc.cargo_weight_kg"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -10,3 +10,6 @@ access_transitops_fuel_log_financial,transitops.fuel_log.financial,model_transit
 access_transitops_expense_manager,transitops.expense.manager,model_transitops_expense,transitops_core.group_fleet_manager,1,1,1,1
 access_transitops_expense_driver,transitops.expense.driver,model_transitops_expense,transitops_core.group_driver,1,0,0,0
 access_transitops_expense_financial,transitops.expense.financial,model_transitops_expense,transitops_core.group_financial_analyst,1,1,1,1
+access_transitops_maintenance_base,transitops.maintenance.base,model_transitops_maintenance,base.group_user,1,1,0,0
+access_transitops_fuel_log_base,transitops.fuel_log.base,model_transitops_fuel_log,base.group_user,1,1,0,0
+access_transitops_expense_base,transitops.expense.base,model_transitops_expense,base.group_user,1,1,0,0

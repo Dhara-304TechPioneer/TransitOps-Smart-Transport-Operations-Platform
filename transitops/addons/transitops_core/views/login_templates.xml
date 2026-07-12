@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="transitops_login" inherit_id="web.login_layout" name="TransitOps Login Layout">
+        <xpath expr="//div[hasclass('container')]" position="replace">
+            <style>
+                body {
+                    margin: 0;
+                    padding: 0;
+                    height: 100vh;
+                    display: flex;
+                    background-color: #ffffff !important;
+                }
+                .split-login-container {
+                    display: flex;
+                    width: 100vw;
+                    height: 100vh;
+                }
+                .login-left {
+                    width: 40%;
+                    background-color: #1e293b;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    padding: 2rem;
+                }
+                .login-left h1 {
+                    color: #f97316;
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    margin-bottom: 0.5rem;
+                }
+                .login-left p {
+                    font-size: 1.1rem;
+                    color: #94a3b8;
+                }
+                .login-right {
+                    width: 60%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 4rem;
+                }
+                .login-form-wrapper {
+                    width: 100%;
+                    max-width: 400px;
+                }
+                .login-form-wrapper .btn-primary {
+                    background-color: #f97316 !important;
+                    border-color: #f97316 !important;
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 8px;
+                    font-weight: bold;
+                }
+                .login-form-wrapper .btn-primary:hover {
+                    background-color: #ea580c !important;
+                }
+                .form-control {
+                    padding: 12px;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                }
+                .card {
+                    border: none !important;
+                    box-shadow: none !important;
+                    background: transparent !important;
+                }
+                .card-body {
+                    padding: 0 !important;
+                }
+                .text-center.pb-3.border-bottom.mb-4 {
+                    display: none !important;
+                }
+            </style>
+            
+            <div class="split-login-container">
+                <!-- Left Dark Panel -->
+                <div class="login-left">
+                    <h1>TransitOps</h1>
+                    <p>Smart Transport Operations Platform</p>
+                    <div class="mt-5 text-start" style="width: 100%; max-width: 300px;">
+                        <p><i class="fa fa-check text-warning mr-2"></i> Fleet Management</p>
+                        <p><i class="fa fa-check text-warning mr-2"></i> Trip Dispatch</p>
+                        <p><i class="fa fa-check text-warning mr-2"></i> Maintenance &amp; Fuel</p>
+                        <p><i class="fa fa-check text-warning mr-2"></i> Financial Analytics</p>
+                    </div>
+                </div>
+
+                <!-- Right Form Panel -->
+                <div class="login-right">
+                    <div class="login-form-wrapper">
+                        <h2 class="mb-4">Sign in to your account</h2>
+                        <!-- We inject the original login form card here -->
+                        <t t-out="0"/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="transitops.Dashboard" owl="1">
+        <div class="o_action_manager">
+            <div class="container-fluid p-4 bg-100">
+                <h1 class="mb-4">TransitOps Dashboard</h1>
+                
+                <div class="row" t-if="state.data">
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Active Vehicles</h5>
+                                <h2 class="display-5 text-primary"><t t-esc="state.data.active_vehicles"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Available Vehicles</h5>
+                                <h2 class="display-5 text-success"><t t-esc="state.data.available_vehicles"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">In Maintenance</h5>
+                                <h2 class="display-5 text-warning"><t t-esc="state.data.in_maintenance"/></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Fleet Utilization</h5>
+                                <h2 class="display-5 text-info"><t t-esc="state.data.fleet_utilization"/>%</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Active Trips</h5>
+                                <h2 class="display-5"><t t-esc="state.data.active_trips"/></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Pending Trips</h5>
+                                <h2 class="display-5"><t t-esc="state.data.pending_trips"/></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-muted">Drivers On Duty</h5>
+                                <h2 class="display-5"><t t-esc="state.data.drivers_on_duty"/></h2>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4" t-if="state.data">
+                    
+                    <!-- Data Tables -->
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0">Recent Trips</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-hover mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Route</th>
+                                                    <th>Vehicle</th>
+                                                    <th>Driver</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="state.data.recent_trips" t-as="trip" t-key="trip_index">
+                                                    <td><t t-esc="trip.source"/> to <t t-esc="trip.destination"/></td>
+                                                    <td><t t-esc="trip.vehicle"/></td>
+                                                    <td><t t-esc="trip.driver"/></td>
+                                                    <td>
+                                                        <span t-attf-class="badge {{trip.state === 'completed' ? 'text-bg-success' : trip.state === 'dispatched' ? 'text-bg-warning' : trip.state === 'cancelled' ? 'text-bg-danger' : 'text-bg-info'}}">
+                                                            <t t-esc="trip.state"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr t-if="!state.data.recent_trips.length">
+                                                    <td colspan="4" class="text-center text-muted py-3">No trips found.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 mb-4">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0">Fleet Status</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-hover mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Vehicle</th>
+                                                    <th>Model</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr t-foreach="state.data.recent_vehicles" t-as="vehicle" t-key="vehicle_index">
+                                                    <td><t t-esc="vehicle.name"/></td>
+                                                    <td><t t-esc="vehicle.model_name"/></td>
+                                                    <td>
+                                                        <span t-attf-class="badge {{vehicle.status === 'available' ? 'text-bg-success' : vehicle.status === 'in_shop' ? 'text-bg-warning' : vehicle.status === 'retired' ? 'text-bg-danger' : 'text-bg-info'}}">
+                                                            <t t-esc="vehicle.status"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr t-if="!state.data.recent_vehicles.length">
+                                                    <td colspan="3" class="text-center text-muted py-3">No vehicles found.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Panel -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0">Trip Status Breakdown</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="tripChart" width="100%" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div t-else="">
+                    <p>Loading data...</p>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

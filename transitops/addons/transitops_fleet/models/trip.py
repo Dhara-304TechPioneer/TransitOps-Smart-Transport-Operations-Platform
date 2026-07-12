@@ -24,6 +24,13 @@ class TransitOpsTrip(models.Model):
         ('cancelled', 'Cancelled'),
     ], string='State', default='draft', tracking=True)
 
+    region = fields.Selection([
+        ('north', 'North Region'),
+        ('south', 'South Region'),
+        ('east', 'East Region'),
+        ('west', 'West Region')
+    ], string='Region', tracking=True)
+
     def action_dispatch(self):
         for trip in self:
             if trip.state != 'draft':

@@ -1,0 +1,46 @@
+/* Global Branding */
+:root {
+    --o-brand-odoo: #f97316 !important;
+    --o-brand-primary: #f97316 !important;
+}
+
+/* Primary Buttons */
+.btn-primary {
+    background-color: #f97316 !important;
+    border-color: #f97316 !important;
+    color: white !important;
+}
+.btn-primary:hover {
+    background-color: #ea580c !important;
+    border-color: #ea580c !important;
+}
+
+/* Custom Pill Badges */
+.badge {
+    border-radius: 50rem !important;
+    padding: 0.5em 1em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+}
+
+.text-bg-success {
+    background-color: #22c55e !important; /* Vibrant Green */
+    color: white !important;
+}
+
+.text-bg-info {
+    background-color: #3b82f6 !important; /* Vibrant Blue */
+    color: white !important;
+}
+
+.text-bg-warning {
+    background-color: #eab308 !important; /* Vibrant Yellow/Orange */
+    color: white !important;
+}
+
+.text-bg-danger {
+    background-color: #ef4444 !important; /* Vibrant Red */
+    color: white !important;
+}
+
+

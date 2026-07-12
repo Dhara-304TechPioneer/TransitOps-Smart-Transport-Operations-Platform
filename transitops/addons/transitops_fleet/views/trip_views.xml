@@ -23,6 +23,7 @@
                         <group string="Logistics">
                             <field name="cargo_weight_kg"/>
                             <field name="planned_distance_km"/>
+                            <field name="region"/>
                             <field name="fuel_consumed" invisible="state not in ('completed')"/>
                             <field name="final_odometer" invisible="state not in ('completed')"/>
                         </group>
@@ -47,9 +48,31 @@
                 <field name="destination"/>
                 <field name="vehicle_id"/>
                 <field name="driver_id"/>
+                <field name="region"/>
                 <field name="cargo_weight_kg"/>
                 <field name="state" decoration-info="state=='draft'" decoration-warning="state=='dispatched'" decoration-success="state=='completed'" decoration-muted="state=='cancelled'" widget="badge"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- View: Search -->
+    <record id="view_transitops_trip_search" model="ir.ui.view">
+        <field name="name">transitops.trip.search</field>
+        <field name="model">transitops.trip</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="region"/>
+                <filter string="North Region" name="filter_region_north" domain="[('region', '=', 'north')]"/>
+                <filter string="South Region" name="filter_region_south" domain="[('region', '=', 'south')]"/>
+                <filter string="East Region" name="filter_region_east" domain="[('region', '=', 'east')]"/>
+                <filter string="West Region" name="filter_region_west" domain="[('region', '=', 'west')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                    <filter string="Region" name="group_by_region" context="{'group_by':'region'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
