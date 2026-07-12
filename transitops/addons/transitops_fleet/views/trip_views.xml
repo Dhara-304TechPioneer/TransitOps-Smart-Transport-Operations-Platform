@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View: Form -->
+    <record id="view_transitops_trip_form" model="ir.ui.view">
+        <field name="name">transitops.trip.form</field>
+        <field name="model">transitops.trip</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_dispatch" string="Dispatch" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_complete" string="Complete" type="object" class="oe_highlight" invisible="state != 'dispatched'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state in ('completed', 'cancelled')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dispatched,completed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Routing &amp; Assignment">
+                            <field name="source"/>
+                            <field name="destination"/>
+                            <field name="vehicle_id" domain="[('status', '=', 'available')]"/>
+                            <field name="driver_id" domain="[('status', '=', 'available')]"/>
+                        </group>
+                        <group string="Logistics">
+                            <field name="cargo_weight_kg"/>
+                            <field name="planned_distance_km"/>
+                            <field name="fuel_consumed" invisible="state not in ('completed')"/>
+                            <field name="final_odometer" invisible="state not in ('completed')"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- View: Tree -->
+    <record id="view_transitops_trip_tree" model="ir.ui.view">
+        <field name="name">transitops.trip.tree</field>
+        <field name="model">transitops.trip</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="source"/>
+                <field name="destination"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="cargo_weight_kg"/>
+                <field name="state" decoration-info="state=='draft'" decoration-warning="state=='dispatched'" decoration-success="state=='completed'" decoration-muted="state=='cancelled'" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_transitops_trip" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">transitops.trip</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_transitops_trip" name="Trips" parent="transitops_core.menu_transitops_root" action="action_transitops_trip" sequence="20"/>
+
+</odoo>

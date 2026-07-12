@@ -1,83 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Maintenance Form View -->
+    <!-- Maintenance View: Form -->
     <record id="view_transitops_maintenance_form" model="ir.ui.view">
         <field name="name">transitops.maintenance.form</field>
         <field name="model">transitops.maintenance</field>
         <field name="arch" type="xml">
-            <form string="Maintenance Record">
+            <form>
                 <header>
-                    <button name="action_close" type="object" string="Close Maintenance" class="oe_highlight" invisible="not active"/>
+                    <button name="action_close" string="Close Maintenance" type="object" class="oe_highlight" invisible="active == False"/>
                 </header>
                 <sheet>
-                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
                     <group>
                         <group>
                             <field name="vehicle_id"/>
                             <field name="date"/>
-                            <field name="active" invisible="1"/>
                         </group>
                         <group>
-                            <field name="cost" widget="monetary"/>
+                            <field name="cost"/>
+                            <field name="active" readonly="1"/>
                         </group>
                     </group>
                     <group>
                         <field name="description"/>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
         </field>
     </record>
 
-    <!-- Maintenance Tree View -->
+    <!-- Maintenance View: Tree -->
     <record id="view_transitops_maintenance_tree" model="ir.ui.view">
         <field name="name">transitops.maintenance.tree</field>
         <field name="model">transitops.maintenance</field>
         <field name="arch" type="xml">
-            <tree string="Maintenance Records" decoration-muted="not active">
+            <tree decoration-muted="active==False" decoration-danger="active==True">
                 <field name="vehicle_id"/>
                 <field name="date"/>
                 <field name="description"/>
-                <field name="cost" sum="Total Cost"/>
-                <field name="active" widget="boolean_toggle"/>
+                <field name="cost"/>
+                <field name="active"/>
             </tree>
         </field>
     </record>
 
-    <!-- Maintenance Search View -->
-    <record id="view_transitops_maintenance_search" model="ir.ui.view">
-        <field name="name">transitops.maintenance.search</field>
-        <field name="model">transitops.maintenance</field>
-        <field name="arch" type="xml">
-            <search string="Search Maintenance">
-                <field name="vehicle_id"/>
-                <field name="description"/>
-                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
-                <filter string="Closed" name="closed" domain="[('active', '=', False)]"/>
-                <separator/>
-                <group expand="0" string="Group By">
-                    <filter string="Vehicle" name="group_vehicle" context="{'group_by':'vehicle_id'}"/>
-                    <filter string="Date" name="group_date" context="{'group_by':'date:month'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
-
-    <!-- Actions -->
+    <!-- Maintenance Action -->
     <record id="action_transitops_maintenance" model="ir.actions.act_window">
         <field name="name">Maintenance</field>
         <field name="res_model">transitops.maintenance</field>
         <field name="view_mode">tree,form</field>
-        <field name="context">{'search_default_active': 1}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create the first maintenance record!
-            </p>
-        </field>
     </record>
 
     <!-- Menus -->
-    <menuitem id="menu_transitops_ops_root" name="TransitOps Ops" sequence="20"/>
-    <menuitem id="menu_transitops_maintenance" name="Maintenance" parent="menu_transitops_ops_root" action="action_transitops_maintenance" sequence="10"/>
+    <menuitem id="menu_transitops_ops" name="Operations" parent="transitops_core.menu_transitops_root" sequence="30"/>
+    <menuitem id="menu_transitops_maintenance" name="Maintenance" parent="menu_transitops_ops" action="action_transitops_maintenance" sequence="10"/>
 
 </odoo>

@@ -1,12 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_maintenance_user,maintenance.user,model_transitops_maintenance,base.group_user,1,0,0,0
-access_maintenance_manager,maintenance.manager,model_transitops_maintenance,transitops_core.group_fleet_manager,1,1,1,1
-access_maintenance_analyst,maintenance.analyst,model_transitops_maintenance,transitops_core.group_financial_analyst,1,0,0,0
+access_transitops_maintenance_manager,transitops.maintenance.manager,model_transitops_maintenance,transitops_core.group_fleet_manager,1,1,1,1
+access_transitops_maintenance_driver,transitops.maintenance.driver,model_transitops_maintenance,transitops_core.group_driver,1,0,0,0
+access_transitops_maintenance_financial,transitops.maintenance.financial,model_transitops_maintenance,transitops_core.group_financial_analyst,1,1,1,1
 
-access_fuel_log_user,fuel_log.user,model_transitops_fuel_log,base.group_user,1,0,0,0
-access_fuel_log_manager,fuel_log.manager,model_transitops_fuel_log,transitops_core.group_fleet_manager,1,1,1,1
-access_fuel_log_analyst,fuel_log.analyst,model_transitops_fuel_log,transitops_core.group_financial_analyst,1,1,1,1
+access_transitops_fuel_log_manager,transitops.fuel_log.manager,model_transitops_fuel_log,transitops_core.group_fleet_manager,1,1,1,1
+access_transitops_fuel_log_driver,transitops.fuel_log.driver,model_transitops_fuel_log,transitops_core.group_driver,1,0,0,0
+access_transitops_fuel_log_financial,transitops.fuel_log.financial,model_transitops_fuel_log,transitops_core.group_financial_analyst,1,1,1,1
 
-access_expense_user,expense.user,model_transitops_expense,base.group_user,1,0,0,0
-access_expense_manager,expense.manager,model_transitops_expense,transitops_core.group_fleet_manager,1,1,1,1
-access_expense_analyst,expense.analyst,model_transitops_expense,transitops_core.group_financial_analyst,1,1,1,1
+access_transitops_expense_manager,transitops.expense.manager,model_transitops_expense,transitops_core.group_fleet_manager,1,1,1,1
+access_transitops_expense_driver,transitops.expense.driver,model_transitops_expense,transitops_core.group_driver,1,0,0,0
+access_transitops_expense_financial,transitops.expense.financial,model_transitops_expense,transitops_core.group_financial_analyst,1,1,1,1

@@ -1,11 +1,15 @@
 {
     'name': 'TransitOps Operations',
     'version': '1.0',
-    'summary': 'Maintenance, Fuel Logs, and Expense management for TransitOps',
-    'description': 'Handles fleet maintenance, fuel logging, and expense tracking for the TransitOps system.',
-    'category': 'Operations',
-    'author': 'Hackathon Team - Dev C',
-    'depends': ['transitops_fleet'], # TRD: transitops_ops depends on transitops_fleet (which depends on core)
+    'summary': 'Maintenance, Fuel, Expenses and Reports',
+    'sequence': 12,
+    'description': """
+TransitOps Operations
+=====================
+Handles operations, compliance, financials, and ROI computations.
+    """,
+    'category': 'Operations/TransitOps',
+    'depends': ['transitops_fleet'],
     'data': [
         'security/ir.model.access.csv',
         'views/maintenance_views.xml',
@@ -14,4 +18,6 @@
     ],
     'installable': True,
     'application': False,
+    'auto_install': False,
+    'license': 'LGPL-3',
 }

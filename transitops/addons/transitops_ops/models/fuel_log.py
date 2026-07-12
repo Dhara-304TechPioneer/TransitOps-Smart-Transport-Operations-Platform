@@ -1,8 +1,8 @@
 from odoo import models, fields
 
-class FuelLog(models.Model):
+class TransitOpsFuelLog(models.Model):
     _name = 'transitops.fuel_log'
-    _description = 'Vehicle Fuel Log'
+    _description = 'TransitOps Fuel Log'
 
     vehicle_id = fields.Many2one('transitops.vehicle', string='Vehicle', required=True)
     liters = fields.Float(string='Liters', required=True)

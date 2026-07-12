@@ -1,72 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Fuel Log Pivot View -->
-    <record id="view_transitops_fuel_log_pivot" model="ir.ui.view">
-        <field name="name">transitops.fuel_log.pivot</field>
-        <field name="model">transitops.fuel_log</field>
-        <field name="arch" type="xml">
-            <pivot string="Fuel Cost Analysis" sample="1">
-                <field name="vehicle_id" type="row"/>
-                <field name="date" type="col" interval="month"/>
-                <field name="cost" type="measure"/>
-                <field name="liters" type="measure"/>
-            </pivot>
-        </field>
+    <!-- Simple report action placeholder -->
+    <record id="action_transitops_reports" model="ir.actions.client">
+        <field name="name">Reports</field>
+        <field name="tag">reload</field>
     </record>
 
-    <!-- Fuel Log Graph View -->
-    <record id="view_transitops_fuel_log_graph" model="ir.ui.view">
-        <field name="name">transitops.fuel_log.graph</field>
-        <field name="model">transitops.fuel_log</field>
-        <field name="arch" type="xml">
-            <graph string="Fuel Costs by Vehicle" type="bar">
-                <field name="vehicle_id"/>
-                <field name="cost" type="measure"/>
-            </graph>
-        </field>
-    </record>
-
-    <!-- Expense Pivot View -->
-    <record id="view_transitops_expense_pivot" model="ir.ui.view">
-        <field name="name">transitops.expense.pivot</field>
-        <field name="model">transitops.expense</field>
-        <field name="arch" type="xml">
-            <pivot string="Expense Analysis" sample="1">
-                <field name="vehicle_id" type="row"/>
-                <field name="category" type="col"/>
-                <field name="amount" type="measure"/>
-            </pivot>
-        </field>
-    </record>
-
-    <!-- Expense Graph View -->
-    <record id="view_transitops_expense_graph" model="ir.ui.view">
-        <field name="name">transitops.expense.graph</field>
-        <field name="model">transitops.expense</field>
-        <field name="arch" type="xml">
-            <graph string="Expenses by Category" type="pie">
-                <field name="category"/>
-                <field name="amount" type="measure"/>
-            </graph>
-        </field>
-    </record>
-
-    <!-- Actions for Reports -->
-    <record id="action_report_fuel_log" model="ir.actions.act_window">
-        <field name="name">Fuel Analysis</field>
-        <field name="res_model">transitops.fuel_log</field>
-        <field name="view_mode">pivot,graph,tree</field>
-    </record>
-
-    <record id="action_report_expense" model="ir.actions.act_window">
-        <field name="name">Expense Analysis</field>
-        <field name="res_model">transitops.expense</field>
-        <field name="view_mode">pivot,graph,tree</field>
-    </record>
-
-    <!-- Report Menus -->
-    <menuitem id="menu_transitops_reports_root" name="Reports" parent="menu_transitops_ops_root" sequence="30"/>
-    <menuitem id="menu_transitops_report_fuel" name="Fuel Analysis" parent="menu_transitops_reports_root" action="action_report_fuel_log" sequence="10"/>
-    <menuitem id="menu_transitops_report_expense" name="Expense Analysis" parent="menu_transitops_reports_root" action="action_report_expense" sequence="20"/>
-
+    <menuitem id="menu_transitops_reports" name="Reports" parent="menu_transitops_financials" action="action_transitops_reports" sequence="30"/>
 </odoo>
