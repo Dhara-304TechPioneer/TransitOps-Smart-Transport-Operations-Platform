@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Fuel Log Form View -->
+    <record id="view_transitops_fuel_log_form" model="ir.ui.view">
+        <field name="name">transitops.fuel_log.form</field>
+        <field name="model">transitops.fuel_log</field>
+        <field name="arch" type="xml">
+            <form string="Fuel Log">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="liters"/>
+                            <field name="cost" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Fuel Log Tree View -->
+    <record id="view_transitops_fuel_log_tree" model="ir.ui.view">
+        <field name="name">transitops.fuel_log.tree</field>
+        <field name="model">transitops.fuel_log</field>
+        <field name="arch" type="xml">
+            <tree string="Fuel Logs">
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="liters" sum="Total Liters"/>
+                <field name="cost" sum="Total Cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Fuel Log Search View -->
+    <record id="view_transitops_fuel_log_search" model="ir.ui.view">
+        <field name="name">transitops.fuel_log.search</field>
+        <field name="model">transitops.fuel_log</field>
+        <field name="arch" type="xml">
+            <search string="Search Fuel Logs">
+                <field name="vehicle_id"/>
+                <group expand="0" string="Group By">
+                    <filter string="Vehicle" name="group_vehicle" context="{'group_by':'vehicle_id'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Expense Form View -->
+    <record id="view_transitops_expense_form" model="ir.ui.view">
+        <field name="name">transitops.expense.form</field>
+        <field name="model">transitops.expense</field>
+        <field name="arch" type="xml">
+            <form string="Expense">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="category"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="amount" widget="monetary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Expense Tree View -->
+    <record id="view_transitops_expense_tree" model="ir.ui.view">
+        <field name="name">transitops.expense.tree</field>
+        <field name="model">transitops.expense</field>
+        <field name="arch" type="xml">
+            <tree string="Expenses">
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="category"/>
+                <field name="amount" sum="Total Amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Expense Kanban View -->
+    <record id="view_transitops_expense_kanban" model="ir.ui.view">
+        <field name="name">transitops.expense.kanban</field>
+        <field name="model">transitops.expense</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="category">
+                <field name="vehicle_id"/>
+                <field name="amount"/>
+                <field name="date"/>
+                <field name="category"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="vehicle_id"/>
+                                </strong>
+                                <div>
+                                    <span class="text-muted"><field name="date"/></span>
+                                </div>
+                                <div class="mt-2 text-end">
+                                    <span class="badge rounded-pill text-bg-success">
+                                        <field name="amount" widget="monetary"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Expense Search View -->
+    <record id="view_transitops_expense_search" model="ir.ui.view">
+        <field name="name">transitops.expense.search</field>
+        <field name="model">transitops.expense</field>
+        <field name="arch" type="xml">
+            <search string="Search Expenses">
+                <field name="vehicle_id"/>
+                <field name="category"/>
+                <group expand="0" string="Group By">
+                    <filter string="Vehicle" name="group_vehicle" context="{'group_by':'vehicle_id'}"/>
+                    <filter string="Category" name="group_category" context="{'group_by':'category'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_transitops_fuel_log" model="ir.actions.act_window">
+        <field name="name">Fuel Logs</field>
+        <field name="res_model">transitops.fuel_log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_transitops_expense" model="ir.actions.act_window">
+        <field name="name">Expenses</field>
+        <field name="res_model">transitops.expense</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_transitops_expenses_root" name="Expenses &amp; Fuel" parent="menu_transitops_ops_root" sequence="20"/>
+    <menuitem id="menu_transitops_fuel_log" name="Fuel Logs" parent="menu_transitops_expenses_root" action="action_transitops_fuel_log" sequence="10"/>
+    <menuitem id="menu_transitops_expense" name="Other Expenses" parent="menu_transitops_expenses_root" action="action_transitops_expense" sequence="20"/>
+
+</odoo>
