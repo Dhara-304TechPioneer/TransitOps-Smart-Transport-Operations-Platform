@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="view_transitops_maintenance_list" model="ir.ui.view"><field name="name">transitops.maintenance.list</field><field name="model">transitops.maintenance</field><field name="arch" type="xml"><tree decoration-warning="active == True" decoration-success="active == False"><field name="vehicle_id"/><field name="description"/><field name="date"/><field name="cost"/><field name="active"/></tree></field></record>
+ <record id="view_transitops_maintenance_form" model="ir.ui.view"><field name="name">transitops.maintenance.form</field><field name="model">transitops.maintenance</field><field name="arch" type="xml"><form><header><button name="action_close" type="object" string="Close Maintenance" class="btn-primary" invisible="not active"/><field name="active" widget="boolean_toggle"/></header><sheet><group><field name="vehicle_id" domain="[('status','!=','retired')]" readonly="not active"/><field name="description" readonly="not active"/><field name="date" readonly="not active"/><field name="cost" readonly="not active"/><field name="currency_id" invisible="1"/></group></sheet></form></field></record>
+ <record id="action_transitops_maintenance" model="ir.actions.act_window"><field name="name">Maintenance</field><field name="res_model">transitops.maintenance</field><field name="view_mode">tree,form</field></record>
+ <menuitem id="menu_transitops_maintenance" name="Maintenance" parent="transitops_core.menu_transitops_root" action="action_transitops_maintenance" sequence="50"/>
+</odoo>

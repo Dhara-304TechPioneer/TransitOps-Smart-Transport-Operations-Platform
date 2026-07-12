@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_transitops_vehicle_tree" model="ir.ui.view">
+        <field name="name">transitops.vehicle.tree</field>
+        <field name="model">transitops.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Registration Number"/>
+                <field name="model_name" string="Model"/>
+                <field name="vehicle_type" string="Type"/>
+                <field name="max_load_kg" string="Load Capacity"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_transitops_vehicle_form" model="ir.ui.view">
+        <field name="name">transitops.vehicle.form</field>
+        <field name="model">transitops.vehicle</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle">
+                <sheet>
+                    <group>
+                        <group string="Vehicle Information">
+                            <field name="name"/>
+                            <field name="model_name"/>
+                            <field name="vehicle_type"/>
+                        </group>
+                        <group string="Capacity">
+                            <field name="max_load_kg"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Financial">
+                            <field name="acquisition_cost"/>
+                        </group>
+                        <group string="Status">
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_transitops_vehicle" model="ir.actions.act_window">
+        <field name="name">Vehicles</field>
+        <field name="res_model">transitops.vehicle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_transitops_root" name="TransitOps" sequence="10"/>
+    <menuitem id="menu_transitops_fleet" name="Fleet" parent="menu_transitops_root" sequence="10"/>
+    <menuitem id="menu_transitops_vehicles" name="Vehicles" parent="menu_transitops_fleet"
+              action="action_transitops_vehicle" sequence="10"/>
+</odoo>

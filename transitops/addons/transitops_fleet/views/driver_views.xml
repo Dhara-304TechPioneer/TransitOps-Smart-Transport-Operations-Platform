@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="view_transitops_driver_list" model="ir.ui.view"><field name="name">transitops.driver.list</field><field name="model">transitops.driver</field><field name="arch" type="xml"><tree decoration-success="status == 'available'" decoration-info="status == 'on_trip'" decoration-danger="status == 'suspended'"><field name="name"/><field name="license_number"/><field name="license_category"/><field name="license_expiry"/><field name="safety_score"/><field name="status" widget="badge"/></tree></field></record>
+ <record id="view_transitops_driver_form" model="ir.ui.view"><field name="name">transitops.driver.form</field><field name="model">transitops.driver</field><field name="arch" type="xml"><form><sheet><div class="oe_title"><h1><field name="name"/></h1></div><group><group><field name="license_number"/><field name="license_category"/><field name="license_expiry"/></group><group><field name="contact_number"/><field name="safety_score"/><field name="status" widget="radio"/></group></group></sheet></form></field></record>
+ <record id="action_transitops_driver" model="ir.actions.act_window"><field name="name">Drivers</field><field name="res_model">transitops.driver</field><field name="view_mode">tree,form</field></record>
+ <menuitem id="menu_transitops_drivers" name="Drivers" parent="transitops_core.menu_transitops_root" action="action_transitops_driver" sequence="30"/>
+</odoo>

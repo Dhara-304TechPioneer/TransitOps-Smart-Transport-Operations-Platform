@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="view_transitops_fuel_log_list" model="ir.ui.view"><field name="name">transitops.fuel.log.list</field><field name="model">transitops.fuel_log</field><field name="arch" type="xml"><tree><field name="date"/><field name="vehicle_id"/><field name="liters"/><field name="cost"/></tree></field></record>
+ <record id="view_transitops_fuel_log_form" model="ir.ui.view"><field name="name">transitops.fuel.log.form</field><field name="model">transitops.fuel_log</field><field name="arch" type="xml"><form><sheet><group><field name="vehicle_id"/><field name="date"/><field name="liters"/><field name="cost"/><field name="currency_id" invisible="1"/></group></sheet></form></field></record>
+ <record id="action_transitops_fuel_log" model="ir.actions.act_window"><field name="name">Fuel Logs</field><field name="res_model">transitops.fuel_log</field><field name="view_mode">tree,form</field></record>
+ <menuitem id="menu_transitops_fuel" name="Fuel Logs" parent="transitops_core.menu_transitops_root" action="action_transitops_fuel_log" sequence="60"/>
+ <record id="view_transitops_expense_list" model="ir.ui.view"><field name="name">transitops.expense.list</field><field name="model">transitops.expense</field><field name="arch" type="xml"><tree><field name="date"/><field name="vehicle_id"/><field name="category"/><field name="amount"/></tree></field></record>
+ <record id="view_transitops_expense_form" model="ir.ui.view"><field name="name">transitops.expense.form</field><field name="model">transitops.expense</field><field name="arch" type="xml"><form><sheet><group><field name="vehicle_id"/><field name="date"/><field name="category"/><field name="amount"/><field name="currency_id" invisible="1"/></group></sheet></form></field></record>
+ <record id="action_transitops_expense" model="ir.actions.act_window"><field name="name">Expenses</field><field name="res_model">transitops.expense</field><field name="view_mode">tree,form</field></record>
+ <menuitem id="menu_transitops_expense" name="Expenses" parent="transitops_core.menu_transitops_root" action="action_transitops_expense" sequence="70"/>
+</odoo>

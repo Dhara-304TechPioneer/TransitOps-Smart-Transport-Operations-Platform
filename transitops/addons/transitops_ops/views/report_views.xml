@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ <record id="view_transitops_fuel_log_pivot" model="ir.ui.view"><field name="name">transitops.fuel.log.pivot</field><field name="model">transitops.fuel_log</field><field name="arch" type="xml"><pivot string="Fuel Cost Analysis"><field name="vehicle_id" type="row"/><field name="cost" type="measure"/><field name="liters" type="measure"/></pivot></field></record>
+ <record id="action_transitops_cost_analysis" model="ir.actions.act_window"><field name="name">Cost Analysis</field><field name="res_model">transitops.fuel_log</field><field name="view_mode">pivot,tree</field></record>
+ <menuitem id="menu_transitops_reports" name="Cost Analysis" parent="transitops_core.menu_transitops_root" action="action_transitops_cost_analysis" sequence="80"/>
+</odoo>
