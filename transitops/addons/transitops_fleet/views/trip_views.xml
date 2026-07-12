@@ -34,8 +34,8 @@
                             <field name="destination"/>
                         </group>
                         <group>
-                            <field name="vehicle_id"/>
-                            <field name="driver_id"/>
+                            <field name="vehicle_id" domain="[('status', '=', 'available')]"/>
+                            <field name="driver_id" domain="[('status', '=', 'available')]"/>
                         </group>
                     </group>
                     <group string="Trip Details">

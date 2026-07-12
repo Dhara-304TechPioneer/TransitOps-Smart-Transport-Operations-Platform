@@ -3,3 +3,7 @@ access_transitops_driver_fleet_manager,access.transitops.driver.fleet.manager,mo
 access_transitops_driver_safety_officer,access.transitops.driver.safety.officer,model_transitops_driver,transitops_core.group_safety_officer,1,1,1,1
 access_transitops_driver_driver,access.transitops.driver.driver,model_transitops_driver,transitops_core.group_driver,1,0,0,0
 access_transitops_driver_financial_analyst,access.transitops.driver.financial.analyst,model_transitops_driver,transitops_core.group_financial_analyst,1,0,0,0
+access_transitops_trip_fleet_manager,access.transitops.trip.fleet.manager,model_transitops_trip,transitops_core.group_fleet_manager,1,1,1,1
+access_transitops_trip_safety_officer,access.transitops.trip.safety.officer,model_transitops_trip,transitops_core.group_safety_officer,1,1,1,1
+access_transitops_trip_driver,access.transitops.trip.driver,model_transitops_trip,transitops_core.group_driver,1,1,1,0
+access_transitops_trip_financial_analyst,access.transitops.trip.financial.analyst,model_transitops_trip,transitops_core.group_financial_analyst,1,0,0,0

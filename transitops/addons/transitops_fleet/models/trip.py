@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -31,8 +31,27 @@ class TransitOpsTrip(models.Model):
         default="draft",
     )
 
+    @api.constrains("cargo_weight_kg", "vehicle_id")
+    def _check_cargo_weight_capacity(self):
+        for trip in self:
+            trip._validate_cargo_weight_capacity()
+
+    @api.constrains("driver_id")
+    def _check_driver_license_expiry(self):
+        for trip in self:
+            trip._validate_driver_license_expiry()
+
+    def _validate_cargo_weight_capacity(self):
+        self.ensure_one()
+        if self.vehicle_id and self.cargo_weight_kg > self.vehicle_id.max_load_kg:
+            raise ValidationError("Cargo weight cannot exceed vehicle maximum load capacity.")
+
+    def _validate_driver_license_expiry(self):
+        self.ensure_one()
+        if self.driver_id.license_expiry and self.driver_id.license_expiry < fields.Date.today():
+            raise ValidationError("Driver license has expired.")
+
     def action_dispatch(self):
-        today = fields.Date.today()
         for trip in self:
             if not trip.vehicle_id:
                 raise ValidationError("Vehicle is required to dispatch a trip.")
@@ -40,14 +59,12 @@ class TransitOpsTrip(models.Model):
                 raise ValidationError("Driver is required to dispatch a trip.")
             if trip.vehicle_id.status != "available":
                 raise ValidationError("Vehicle must be available to dispatch a trip.")
-            if trip.driver_id.status != "available":
-                raise ValidationError("Driver must be available to dispatch a trip.")
             if trip.driver_id.status == "suspended":
                 raise ValidationError("Suspended drivers cannot be dispatched.")
-            if trip.driver_id.license_expiry and trip.driver_id.license_expiry < today:
-                raise ValidationError("Driver license has expired.")
-            if trip.cargo_weight_kg > trip.vehicle_id.max_load_kg:
-                raise ValidationError("Cargo weight cannot exceed vehicle maximum load capacity.")
+            if trip.driver_id.status != "available":
+                raise ValidationError("Driver must be available to dispatch a trip.")
+            trip._validate_driver_license_expiry()
+            trip._validate_cargo_weight_capacity()
 
             trip.vehicle_id.status = "on_trip"
             trip.driver_id.status = "on_trip"
