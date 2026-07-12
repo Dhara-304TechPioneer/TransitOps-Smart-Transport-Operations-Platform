@@ -21,10 +21,13 @@
         <field name="model">transitops.trip</field>
         <field name="arch" type="xml">
             <form string="Trip">
+                <header>
+                    <button name="action_dispatch" string="Dispatch" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_complete" string="Complete" type="object" class="btn-primary" invisible="state != 'dispatched'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state not in ('draft', 'dispatched')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,dispatched,completed,cancelled"/>
+                </header>
                 <sheet>
-                    <group>
-                        <field name="state"/>
-                    </group>
                     <group string="Trip Information">
                         <group>
                             <field name="source"/>

@@ -52,3 +52,23 @@ class TransitOpsTrip(models.Model):
             trip.vehicle_id.status = "on_trip"
             trip.driver_id.status = "on_trip"
             trip.state = "dispatched"
+
+    def action_complete(self):
+        for trip in self:
+            if trip.state != "dispatched":
+                raise ValidationError("Only dispatched trips can be completed.")
+
+            trip.vehicle_id.status = "available"
+            trip.driver_id.status = "available"
+            trip.state = "completed"
+
+    def action_cancel(self):
+        for trip in self:
+            if trip.state not in ("draft", "dispatched"):
+                raise ValidationError("Only draft or dispatched trips can be cancelled.")
+
+            if trip.state == "dispatched":
+                trip.vehicle_id.status = "available"
+                trip.driver_id.status = "available"
+
+            trip.state = "cancelled"
