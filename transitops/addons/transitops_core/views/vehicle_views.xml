@@ -43,11 +43,53 @@
             </form>
         </field>
     </record>
+    <record id="view_transitops_vehicle_search" model="ir.ui.view">
+    <field name="name">transitops.vehicle.search</field>
+    <field name="model">transitops.vehicle</field>
+    <field name="arch" type="xml">
+        <search string="Search Vehicles">
+            <field name="name"/>
+            <field name="model_name"/>
 
+            <filter
+                string="Available"
+                name="available"
+                domain="[('status','=','available')]"/>
+
+            <filter
+                string="On Trip"
+                name="on_trip"
+                domain="[('status','=','on_trip')]"/>
+
+            <filter
+                string="In Shop"
+                name="in_shop"
+                domain="[('status','=','in_shop')]"/>
+
+            <filter
+                string="Retired"
+                name="retired"
+                domain="[('status','=','retired')]"/>
+
+            <group expand="0" string="Group By">
+                <filter
+                    string="Status"
+                    name="group_status"
+                    context="{'group_by':'status'}"/>
+
+                <filter
+                    string="Vehicle Type"
+                    name="group_type"
+                    context="{'group_by':'vehicle_type'}"/>
+            </group>
+        </search>
+    </field>
+</record>
     <record id="action_transitops_vehicle" model="ir.actions.act_window">
         <field name="name">Vehicles</field>
         <field name="res_model">transitops.vehicle</field>
         <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_transitops_vehicle_search"/>
     </record>
 
     <menuitem id="menu_transitops_root" name="TransitOps" sequence="10"/>

@@ -14,7 +14,10 @@ class TransitOpsVehicle(models.Model):
         ('bus', 'Bus'),
         ('other', 'Other'),
     ], string='Vehicle Type', default='van', required=True)
-    max_load_kg = fields.Float(string='Maximum Load (kg)')
+    max_load_kg = fields.Float(
+        string='Maximum Load (kg)',
+        required=True
+    )
     odometer = fields.Float(string='Odometer (km)')
     acquisition_cost = fields.Float(string='Acquisition Cost')
     status = fields.Selection([
